@@ -1,0 +1,85 @@
+﻿@model InveliTestRecuruitment.Models.PurchaseOrderModel
+
+@{
+    ViewData["Title"] = "Details";
+    SupplierModel supplier = ViewBag.Supplier;
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>PurchaseOrderModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Code)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PurchaseDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PurchaseDate)
+        </dd>
+        <dt class = "col-sm-2">
+            Supplier Name
+        </dt>
+        <dd class = "col-sm-10">
+            @supplier.Name
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Remarks)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Remarks)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <h4>Detail</h4>
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Product ID
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    UnitPrice
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (PurchaseOrderDetail detail in ViewBag.Detail)
+            {
+                <tr>
+                    <td>
+                        @detail.ProductID
+                    </td>
+                    <td>
+                        @detail.Quantity
+                    </td>
+                    <td>
+                        @detail.UnitPrice
+                    </td>
+                    <td>
+                        <a asp-controller="PurchaseOrderDetail" asp-action="Create" asp-route-id="@detail.Id">Edit</a> |
+                        <a asp-controller="PurchaseOrderDetail" asp-action="Details" asp-route-id="@detail.Id">Details</a> |
+                        <a asp-controller="PurchaseOrderDetail" asp-action="Delete" asp-route-id="@detail.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
